@@ -1,5 +1,5 @@
 import time
-import funcoes 
+import funcoes
 # Funções do programa
 
 opcao = 0
@@ -33,16 +33,15 @@ while opcao != 5:
 
         linha = int(input('Qual linha você deseja: '))
         if linha == 1:
+            linha = 100
             n_passagem = int(input('Quantas passagens: '))
             crian = int(input('Há crianças: [ 1 ] sim [ 2 ] não: '))
-            if crian == 1: 
-                idade = int(input('A(s) Crianças são menores? [ 1 ] sim [ 2 ] não: '))
-                if idade == 1:
-                    c_passagem = int(input('Quantas crianças: '))
-                    valor_total = funcoes.valor1(n_passagem, c_passagem, linha)
-                else:
-                    print('Sem desconto!')                   
-            linha = 100
+            if crian == 1:
+                    c_passagem = int(input('Quantos menores de idade: '))
+                    valor_total = funcoes.desconto(n_passagem, c_passagem, linha)
+                    pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+            else:
+                print('Sem desconto!')                   
             valor_total = funcoes.valorint(n_passagem,  linha)
             pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
             if pagar == 1:
@@ -53,17 +52,18 @@ while opcao != 5:
             print('Passagem comprada com sucesso.')
 
         elif linha == 2:
+            linha = 55
             n_passagem = int(input('Quantas passagens você deseja: '))
             crian = int(input('Há crinaças: [ 1 ] sim [ 2 ] não: '))
             if crian == 1:
-                idade = int(input('A(s) Crianças são menores de idade? [ 1 ] sim [ 2 ] não: '))
+                idade = int(input('A(s) Crianças são menores de 12 anos? [ 1 ] sim [ 2 ] não: '))
                 if idade == 1:
                      c_passagem = int(input('Quantas crianças: '))
                      valor_total = funcoes.valor1(n_passagem, c_passagem, linha)
                 if idade == 2:
                     print('Sem desconto!')
                     valor_total = funcoes.valorint(n_passagem, linha)
-            linha = 55
+           
             pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
             if pagar == 1:
                 pagar = valor_total
@@ -74,9 +74,9 @@ while opcao != 5:
             print('Passagem comprada com sucesso.')
 
         elif linha == 3:
+            linha = 13
             n_passagem = int(input('Quantas passagens você deseja: '))
             c_passagem = int(input('Quantas crianças: '))
-            linha = 13
             valor_total = funcoes.valor(n_passagem, c_passagem, linha)
             pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
             if pagar == 1:
@@ -88,9 +88,9 @@ while opcao != 5:
             print('Passagem comprada com sucesso.')
 
         elif linha == 4:
+            linha = 25
             n_passagem = int(input('Quantas passagens você deseja: '))
             c_passagem = int(input('Quantas crianças: '))
-            linha = 25
             valor_total = funcoes.valor(n_passagem, c_passagem, linha)
             pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
             if pagar == 1:
@@ -114,14 +114,20 @@ while opcao != 5:
         sen = 0000
         senha = int(input('Digite a senha de acesso: '))
         if senha == sen:
-            print('Senha Correta!')
-            print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa')
-            resp = int(input())
-            if resp == 2: 
-                soma = sum(pagamento)
-                print(f'Caixa da empresa: {soma}R$')
+            while True: 
+                print('Senha Correta!')
+                print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] sair do modo adimin')
+                resp = int(input())
+                if resp == 2: 
+                    soma = sum(pagamento)
+                    print(f'Caixa da empresa: {soma}R$')
+                if resp == 3:
+                    print('Saindo do modo adimin')
+                    break
         else:
             print('Senha incorreta!!')
+            
+
 
     elif opcao == 4:
         funcoes.cls()
