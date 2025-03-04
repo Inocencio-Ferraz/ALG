@@ -12,3 +12,4 @@ def desconto(n_passagem, c_passagem, linha):
     talt = (n_passagem * linha) + (c_passagem * linha) / 2 
     return talt
   
+#HELLO
