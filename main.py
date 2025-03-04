@@ -126,9 +126,9 @@ while opcao != 5:
                     break
         else:
             print('Senha incorreta!!')
-            
-
-
+        #Criar um método para o administrador adicionar linhas de onibus, perguntando a origem, chegada, horário e preço.  
+        #Criar um método para o administrador remover linhas de onibus.  
+    
     elif opcao == 4:
         funcoes.cls()
         print('Volte sempre.')
