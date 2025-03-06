@@ -1,8 +1,10 @@
+#printar as linhas com um for
 import time
 import funcoes
-# Funções do programa
+
 
 opcao = 0
+linhas = [['Monteiro', 'João Pessoa', 100, '06:00', '12:00'],['Monteiro', 'Campina Grande', 55, '07:00', '11:15'],['Monteiro', 'Sumé', 13, '07:30', '08:10'],['Monteiro', 'Serra Branca', 25, '08:00', '09:00']]  #lista para as linhas de onibus 
 passagem = []  # Número de passagens compradas
 pagamento = []  # Receita da empresa
 
@@ -19,16 +21,16 @@ while opcao != 5:
         time.sleep(0.5)
         funcoes.cls()  # Limpa a tela após a operação
         print('=' * 40)
-        print('[ 1 ] [Monteiro => João Pessoa] \n 1 pessoa -> 100R$ - 06:00 => 12:00 ')
+        print(f'[ 1 ] {linhas[0][0]} => {linhas[0][1]} \n 1 pessoa -> {linhas[0][2]}R$ - Horário: {linhas[0][3]} => {linhas[0][4]}')
         time.sleep(0.5)
         print('='*40)
-        print('[ 2 ] [Monteiro => Campina Grande]\n 1 pessoa -> 55R$ - 07:00 => 11:15')
+        print(f'[ 2 ] {linhas[1][0]} => {linhas[1][1]} \n 1 pessoa -> {linhas[1][2]}R$ - Horário: {linhas[1][3]} => {linhas[1][4]}')
         print('=' * 40)
         time.sleep(0.5)
-        print('[ 3 ] [Monteiro => Sumé]\n 1 pessoa -> 13R$  07:30 => 08:10')
+        print(f'[ 3 ] {linhas[2][0]} => {linhas[2][1]}]\n 1 pessoa -> {linhas[2][2]}R$ - Horário: {linhas[2][3]} => {linhas[2][4]}')
         print('=' * 40)
         time.sleep(0.5)
-        print('[ 4 ] [Monteiro => Serra Brabca]\n 1 pessoa -> 25R$ - 08:00 => 09:20')
+        print(f'[ 4 ] {linhas[3][0]} => {linhas[3][1]}\n 1 pessoa -> {linhas[3][2]}R$ - Horário: {linhas[3][3]} => {linhas[3][4]}')
         print('=' * 40)
 
         linha = int(input('Qual linha você deseja: '))
@@ -107,27 +109,54 @@ while opcao != 5:
 
 
     elif opcao == 2:
-      funcoes.cls()  # Limpa a tela após a operação
+        funcoes.cls()  # Limpa a tela após a operação
 
-    elif opcao == 3:
+    elif opcao == 3:   #modo adm
         funcoes.cls()
-        sen = 0000
-        senha = int(input('Digite a senha de acesso: '))
+        sen = '1234'     #senha de acesso
+        senha = input('Digite a senha de acesso: ')
         if senha == sen:
             while True: 
                 print('Senha Correta!')
-                print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] sair do modo adimin')
-                resp = int(input())
+                print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
+                resp = int(input('Qual a opção desejada: '))
                 if resp == 2: 
                     soma = sum(pagamento)
                     print(f'Caixa da empresa: {soma}R$')
-                if resp == 3:
+                if resp ==3:  #opção para adicionar e excluir linhas de onibus na lista. 
+                    funcoes.cls()
+                    print('O que o funcionario deseja editar?\n [ 1 ] para adicionar novas linhas.\n [ 2 ] para excluir linhas antigas.')
+                    op = int(input('Qual a opção desejada: '))
+                    if op == 1: #opção para adicionar linhas de ônibus na lista principal
+                        print('Para adicionar novas linhas faça o que se pede: ')
+                        nova_linha = []
+                        saida = str(input('Coloque a seguir a cidade de saída do ônibus: '))
+                        nova_linha.append(saida)
+                        chegada = str(input('Coloque a seguir a cidade de chegada do ônibus: '))
+                        nova_linha.append(chegada)
+                        preco = float(input('Coloque a seguir o preço da passagem: '))
+                        nova_linha.append(preco)
+                        hora1 = str(input('Coloque a seguir o horário de saida do ônibus em formato 00:00: '))
+                        nova_linha.append(hora1)
+                        hora2 = str(input('Coloque a seguir o horario de chegada do ônibus em formato 00:00: '))
+                        nova_linha.append(hora2)
+                        linhas.append(nova_linha)
+                        print('Essas são as linhas de ônibus atuais: ')
+                        print(linhas)
+                    if op == 2:  #opção para excluir linhas de ônibus na lista principal
+                        print('Para excluir linhas de ônibus faça o que se pede:\nEssas são as linhas de ônibus disponiveis no catalogo:')
+                        print(linhas)
+                        excluir = int(input('Essas linhas são listas que possuem as informações de cada linha de ônibus, de 0 a x(quantidade de linhas de ônibus no total), selecione a lista que você deseja excluir: '))
+                        linhas.pop(excluir)
+                        print('linha de ônibus excluida!\nEssas são as linhas que continuaram no catalogo.')
+                        print(linhas)
+                    else: 
+                        print('opção invalida, tente novamente.')
+                if resp == 4:
                     print('Saindo do modo adimin')
                     break
         else:
             print('Senha incorreta!!')
-        #Criar um método para o administrador adicionar linhas de onibus, perguntando a origem, chegada, horário e preço.  
-        #Criar um método para o administrador remover linhas de onibus.  
         #Criar a receita da empresa
     
     elif opcao == 4:
