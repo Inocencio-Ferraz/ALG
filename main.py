@@ -7,6 +7,7 @@ opcao = 0
 linhas = [['Monteiro', 'João Pessoa', 100, '06:00', '12:00'],['Monteiro', 'Campina Grande', 55, '07:00', '11:15'],['Monteiro', 'Sumé', 13, '07:30', '08:10'],['Monteiro', 'Serra Branca', 25, '08:00', '09:00']]  #lista para as linhas de onibus 
 passagem = []  # Número de passagens compradas
 pagamento = []  # Receita da empresa
+historico = []
 
 while opcao != 5:
     print('Viação Santa Cruz FC')
@@ -20,18 +21,18 @@ while opcao != 5:
     if opcao == 1:
         time.sleep(0.5)
         funcoes.cls()  # Limpa a tela após a operação
-        print('=' * 40)
+        print('=' * 60)
         print(f'[ 1 ] {linhas[0][0]} => {linhas[0][1]} \n 1 pessoa -> {linhas[0][2]}R$ - Horário: {linhas[0][3]} => {linhas[0][4]}')
         time.sleep(0.5)
-        print('='*40)
+        print('='*60)
         print(f'[ 2 ] {linhas[1][0]} => {linhas[1][1]} \n 1 pessoa -> {linhas[1][2]}R$ - Horário: {linhas[1][3]} => {linhas[1][4]}')
-        print('=' * 40)
+        print('=' * 60)
         time.sleep(0.5)
         print(f'[ 3 ] {linhas[2][0]} => {linhas[2][1]}]\n 1 pessoa -> {linhas[2][2]}R$ - Horário: {linhas[2][3]} => {linhas[2][4]}')
-        print('=' * 40)
+        print('=' * 60)
         time.sleep(0.5)
         print(f'[ 4 ] {linhas[3][0]} => {linhas[3][1]}\n 1 pessoa -> {linhas[3][2]}R$ - Horário: {linhas[3][3]} => {linhas[3][4]}')
-        print('=' * 40)
+        print('=' * 60)
 
         linha = int(input('Qual linha você deseja: '))
         if linha == 1:
@@ -42,66 +43,106 @@ while opcao != 5:
                     c_passagem = int(input('Quantos menores de idade: '))
                     valor_total = funcoes.desconto(n_passagem, c_passagem, linha)
                     pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
-            else:
-                print('Sem desconto!')                   
-            valor_total = funcoes.valorint(n_passagem,  linha)
-            pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
-            if pagar == 1:
-                pagar = valor_total
-                pagamento.append(pagar)
-            else:
-                print('Compra cancelada.')
-            print('Passagem comprada com sucesso.')
+                    if pagar == 1:
+                        pagar = valor_total
+                        pagamento.append(pagar)
+                    else:
+                        print('Compra cancelada.')
+                    print('Passagem comprada com sucesso.')
+
+            else:                 
+                valor_total = funcoes.valorint(n_passagem,  linha)
+                pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                if pagar == 1:
+                    pagar = valor_total
+                    pagamento.append(pagar)
+                else:
+                    print('Compra cancelada.')
+                print('Passagem comprada com sucesso.')
+            passagem = {'Linha':'[Monteiro => João Pessoa]', 'quatidade de passagem': n_passagem, 'valor total': valor_total }
+            historico.append(passagem)
+
 
         elif linha == 2:
             linha = 55
-            n_passagem = int(input('Quantas passagens você deseja: '))
-            crian = int(input('Há crinaças: [ 1 ] sim [ 2 ] não: '))
+            n_passagem = int(input('Quantas passagens: '))
+            crian = int(input('Há crianças: [ 1 ] sim [ 2 ] não: '))
             if crian == 1:
-                idade = int(input('A(s) Crianças são menores de 12 anos? [ 1 ] sim [ 2 ] não: '))
-                if idade == 1:
-                     c_passagem = int(input('Quantas crianças: '))
-                     valor_total = funcoes.valor1(n_passagem, c_passagem, linha)
-                if idade == 2:
-                    print('Sem desconto!')
-                    valor_total = funcoes.valorint(n_passagem, linha)
-           
-            pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
-            if pagar == 1:
-                pagar = valor_total
-                pagamento.append(pagar)
-            else:
-                print('Compra cancelada.')
-            pagamento.append(pagar)
-            print('Passagem comprada com sucesso.')
+                    c_passagem = int(input('Quantos menores de idade: '))
+                    valor_total = funcoes.desconto(n_passagem, c_passagem, linha)
+                    pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                    if pagar == 1:
+                        pagar = valor_total
+                        pagamento.append(pagar)
+                    else:
+                        print('Compra cancelada.')
+                    print('Passagem comprada com sucesso.')
+
+            else:                 
+                valor_total = funcoes.valorint(n_passagem,  linha)
+                pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                if pagar == 1:
+                    pagar = valor_total
+                    pagamento.append(pagar)
+                else:
+                    print('Compra cancelada.')
+                print('Passagem comprada com sucesso.')
+            passagem = {'Linha':'[Monteiro => Campina Grande]', 'quatidade de passagem': n_passagem, 'valor total': valor_total }
+            historico.append(passagem)
 
         elif linha == 3:
             linha = 13
-            n_passagem = int(input('Quantas passagens você deseja: '))
-            c_passagem = int(input('Quantas crianças: '))
-            valor_total = funcoes.valor(n_passagem, c_passagem, linha)
-            pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
-            if pagar == 1:
-                pagar = valor_total
-                pagamento.append(pagar)
-            else:
-                print('Compra cancelada.')
-            pagamento.append(pagar)
-            print('Passagem comprada com sucesso.')
+            n_passagem = int(input('Quantas passagens: '))
+            crian = int(input('Há crianças: [ 1 ] sim [ 2 ] não: '))
+            if crian == 1:
+                    c_passagem = int(input('Quantos menores de idade: '))
+                    valor_total = funcoes.desconto(n_passagem, c_passagem, linha)
+                    pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                    if pagar == 1:
+                        pagar = valor_total
+                        pagamento.append(pagar)
+                    else:
+                        print('Compra cancelada.')
+                    print('Passagem comprada com sucesso.')
+
+            else:                 
+                valor_total = funcoes.valorint(n_passagem,  linha)
+                pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                if pagar == 1:
+                    pagar = valor_total
+                    pagamento.append(pagar)
+                else:
+                    print('Compra cancelada.')
+                print('Passagem comprada com sucesso.')
+            passagem = {'Linha':'[Monteiro => Sumé]', 'quatidade de passagem': n_passagem, 'valor total': valor_total }
+            historico.append(passagem)
 
         elif linha == 4:
             linha = 25
-            n_passagem = int(input('Quantas passagens você deseja: '))
-            c_passagem = int(input('Quantas crianças: '))
-            valor_total = funcoes.valor(n_passagem, c_passagem, linha)
-            pagar = int(input(f'Valor a ser pago {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
-            if pagar == 1:
-                pagar = valor_total
-                pagamento.append(pagar)
-            else:
-                print('Compra cancelada.')
-            pagamento.append(pagar)
-            print('Passagem comprada com sucesso.')
+            n_passagem = int(input('Quantas passagens: '))
+            crian = int(input('Há crianças: [ 1 ] sim [ 2 ] não: '))
+            if crian == 1:
+                    c_passagem = int(input('Quantos menores de idade: '))
+                    valor_total = funcoes.desconto(n_passagem, c_passagem, linha)
+                    pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                    if pagar == 1:
+                        pagar = valor_total
+                        pagamento.append(pagar)
+                    else:
+                        print('Compra cancelada.')
+                    print('Passagem comprada com sucesso.')
+
+            else:                 
+                valor_total = funcoes.valorint(n_passagem,  linha)
+                pagar = int(input(f'Valor a ser pago Sem desconto é {valor_total}: \nConfirmar pagamento [1] Sim [2] Não: '))
+                if pagar == 1:
+                    pagar = valor_total
+                    pagamento.append(pagar)
+                else:
+                    print('Compra cancelada.')
+                print('Passagem comprada com sucesso.')
+            passagem = {'Linha':'[Monteiro => Serra Branca]', 'quatidade de passagem': n_passagem, 'valor total': valor_total }
+            historico.append(passagem)
 
         else:
             print('Digite um valor válido.')
@@ -116,10 +157,17 @@ while opcao != 5:
         sen = '1234'     #senha de acesso
         senha = input('Digite a senha de acesso: ')
         if senha == sen:
+            print('Senha Correta!')
             while True: 
-                print('Senha Correta!')
                 print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
                 resp = int(input('Qual a opção desejada: '))
+                if resp == 1:
+                   print(' ---- HISTORICO DE PASSAGENS ----')
+                   for e in historico:
+                       print('='*30)
+                       for k, v in e.items():
+                           print(f'{k} = {v}')
+                       print('='*30)
                 if resp == 2: 
                     soma = sum(pagamento)
                     print(f'Caixa da empresa: {soma}R$')
