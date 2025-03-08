@@ -4,6 +4,10 @@ def cls():
     os.system('cls')  # Comando para limpar a tela no Windows
 
 
+def pula_linha():
+    print('=' * 30)
+
+
 def valorint(n_passagem, linha):
     return n_passagem * linha
 
