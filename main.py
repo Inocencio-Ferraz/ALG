@@ -2,13 +2,13 @@ import time
 import funcoes
 
 opcao = 0
-linhas = [['Monteiro', 'João Pessoa', 100, '06:00', '12:00'],
-          ['Monteiro', 'Campina Grande', 55, '07:00', '11:15'],
-          ['Monteiro', 'Sumé', 13, '07:30', '08:10'],
-          ['Monteiro', 'Serra Branca', 25, '08:00', '09:00']]  # lista para as linhas de onibus
-passagem = []  # Número de passagens compradas
+linhas = [['Monteiro', 'João Pessoa', 100.0, '06:00', '12:00'],
+          ['Monteiro', 'Campina Grande', 55.0, '07:00', '11:15'],
+          ['Monteiro', 'Sumé', 13.0, '07:30', '08:10'],
+          ['Monteiro', 'Serra Branca', 25.0, '08:00', '09:00']]  # lista para as linhas de onibus
+passagem = []   # Número de passagens compradas
 pagamento = []  # Receita da empresa
-historico = []
+historico = []  # Histórico de passagens
 
 while opcao != 5:
     print('Viação Santa Cruz FC')
@@ -21,31 +21,30 @@ while opcao != 5:
 
     if opcao == 1:
         funcoes.cls()  # Limpa a tela após a operação
-
         time.sleep(0.5)
+
         for l in linhas: #print de todas as linhas de ônibus disponíveis
-            print(f'{l}\n','='* 60)
+            print(f'{l}\n','='* 30)
 
         linha = int(input('Qual linha você deseja: '))
-        if linha == 1:
+        if linha == 1: # Linha 1
             linha = 100
             funcoes.compra(linha, pagamento)
 
-        elif linha == 2:
+        elif linha == 2: # Linha 2
             linha = 55
             funcoes.compra(linha, pagamento)
 
-        elif linha == 3:
+        elif linha == 3: # Linha 3
             linha = 13
             funcoes.compra(linha, pagamento)
 
-        elif linha == 4:
+        elif linha == 4: # Linha 4
             linha = 25
             funcoes.compra(linha, pagamento)
 
         else:
             print('Digite um valor válido.')
-        funcoes.cls()
 
 
     elif opcao == 2:
@@ -62,12 +61,12 @@ while opcao != 5:
                     'O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
                 resp = int(input('Qual a opção desejada: '))
                 if resp == 1:
-                    print(' ---- HISTORICO DE PASSAGENS ----')
+                    print(' ---- HISTORICO DE PASSAGENS ----') # Eu não entendi nada, ASS: Neto & Jennifer
                     for e in historico:
-                        print('=' * 30)
+                        funcoes.pula_linha()
                         for k, v in e.items():
                             print(f'{k} = {v}')
-                        print('=' * 30)
+                        funcoes.pula_linha()
                 if resp == 2:
                     soma = sum(pagamento)
                     print(f'Caixa da empresa: {soma}R$')
@@ -104,7 +103,7 @@ while opcao != 5:
                     else:
                         print('opção invalida, tente novamente.')
                 if resp == 4:
-                    print('Saindo do modo adimin')
+                    print('Saindo do modo administrador')
                     break
         else:
             print('Senha incorreta!!')
