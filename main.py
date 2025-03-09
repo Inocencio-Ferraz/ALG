@@ -17,31 +17,40 @@ while opcao != 5:
     print('[3] Modo Administrador')
     print('[4] Sair do sistema')
 
+
     opcao = int(input('Digite a opção que você deseja: '))
 
     if opcao == 1:
         funcoes.cls()  # Limpa a tela após a operação
-        time.sleep(0.5)
+       
+        for l in linhas: #print de todas as linhas de ônibus disponívei
+            #for m in l:
+            print(f'{l}\n','='* 60)
 
-        for l in linhas: #print de todas as linhas de ônibus disponíveis
-            print(f'{l}\n','='* 30)
+            #funcoes.pula_linha()
+            time.sleep(0.5)    
 
         linha = int(input('Qual linha você deseja: '))
         if linha == 1: # Linha 1
+            linha01 = '[Monteiro => João Pessoa]'
             linha = 100
-            funcoes.compra(linha, pagamento)
+            funcoes.compra(linha, pagamento, historico, linha01)
+            
 
         elif linha == 2: # Linha 2
+            linha01 = '[Monteiro => Campina Grande]'
             linha = 55
-            funcoes.compra(linha, pagamento)
+            funcoes.compra(linha, pagamento, historico, linha01)
 
         elif linha == 3: # Linha 3
+            linha01 = '[Monteiro => Sumé]'
             linha = 13
-            funcoes.compra(linha, pagamento)
+            funcoes.compra(linha, pagamento, historico, linha01)
 
         elif linha == 4: # Linha 4
+            linha01 = '[Monteiro => Serra Branca]'
             linha = 25
-            funcoes.compra(linha, pagamento)
+            funcoes.compra(linha, pagamento, historico, linha01)
 
         else:
             print('Digite um valor válido.')
@@ -90,7 +99,13 @@ while opcao != 5:
                         nova_linha.append(hora2)
                         linhas.append(nova_linha)
                         print('Essas são as linhas de ônibus atuais: ')
-                        print(linhas)
+                        op = int(input(f'{linhas}\nConfirmar comprar dessa nova linha [1] SIM [2] NÃO: '))
+                        if op == 1:
+                            linha01 = f'[{saida} => {chegada}]'
+                            linha = preco
+                            funcoes.compra(linha, pagamento, historico, linha01)
+                        else:
+                            continue
                     if op == 2:  # opção para excluir linhas de ônibus na lista principal
                         print(
                             'Para excluir linhas de ônibus faça o que se pede:\nEssas são as linhas de ônibus disponiveis no catalogo:')
@@ -116,3 +131,4 @@ while opcao != 5:
 
     else:
         print('Valor inválido. Por favor, digite novamente um valor válido.')
+#opção de sim ou não, não estão funcioando direito
