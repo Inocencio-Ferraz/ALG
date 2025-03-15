@@ -18,43 +18,27 @@ while opcao != 5:
         print('[2] Limpar o terminal')
         print('[3] Modo Administrador')
         print('[4] Sair do sistema')
-
+        
 
         opcao = int(input('Digite a opção que você deseja: '))
 
         if opcao == 1:
             funcoes.cls()  # Limpa a tela após a operação
-            funcoes.pula_linha()
         
-            for l in linhas: #print de todas as linhas de ônibus disponívei
-                #for m in l:
-                print(f'{l}\n',funcoes.pula_linha())
-
-                #funcoes.pula_linha()
-                time.sleep(0.5)    
+            for linha in linhas:
+              funcoes.pula_linha()
+              print(f"{linha[0]} => {linha[1]}, {linha[2]:.2f} R$, {linha[3]} => {linha[4]}")
+            time.sleep(0.5)    
 
             linha = int(input('Qual linha você deseja: '))
-            if linha == 1: # Linha 1
-                linha01 = '[Monteiro => João Pessoa]'
-                linha = 100
-                funcoes.compra(linha, pagamento, historico, linha01)
-                
 
-            elif linha == 2: # Linha 2
-                linha01 = '[Monteiro => Campina Grande]'
-                linha = 55
-                funcoes.compra(linha, pagamento, historico, linha01)
-
-            elif linha == 3: # Linha 3
-                linha01 = '[Monteiro => Sumé]'
-                linha = 13
-                funcoes.compra(linha, pagamento, historico, linha01)
-
-            elif linha == 4: # Linha 4
-                linha01 = '[Monteiro => Serra Branca]'
-                linha = 25
-                funcoes.compra(linha, pagamento, historico, linha01)
-
+            if 1 <= linha <= len(linhas):  # Verifica se a linha escolhida é válida
+                funcoes.cls()
+                linha_selecionada = linhas[linha - 1] #Seleciona o número correto da linha, excluindo a linha 0
+                linha01 = f'{linha_selecionada[0]} => {linha_selecionada[1]}' #Saí e chega
+                preco = linha_selecionada[2] #Preço da passagem
+                funcoes.compra(preco, pagamento, historico, linha01)
+            
             else:
                 print('Digite um valor válido.')
 
@@ -73,12 +57,14 @@ while opcao != 5:
                         'O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
                     resp = int(input('Qual a opção desejada: '))
                     if resp == 1:
-                        print(' ---- HISTORICO DE PASSAGENS ----') # Eu não entendi nada, ASS: Neto & Jennifer
+                        print(' ---- HISTORICO DE PASSAGENS ----') 
                         for e in historico:
                             funcoes.pula_linha()
                             for k, v in e.items():
                                 print(f'{k} = {v}')
                             funcoes.pula_linha()
+
+
                     if resp == 2:
                         soma = sum(pagamento)
                         print(f'Caixa da empresa: {soma}R$')
@@ -134,10 +120,6 @@ while opcao != 5:
 
         else:
             print('Valor inválido. Por favor, digite novamente um valor válido.')
-    #opção de sim ou não, não estão funcioando direito
   
     except ValueError:
         continue
-        
-
-
