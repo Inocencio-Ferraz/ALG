@@ -3,9 +3,9 @@ import funcoes
 
 opcao = 0
 linhas = [['Monteiro', 'João Pessoa', 100.0, '06:00', '12:00'],
-        ['Monteiro', 'Campina Grande', 55.0, '07:00', '11:15'],
-        ['Monteiro', 'Sumé', 13.0, '07:30', '08:10'],
-        ['Monteiro', 'Serra Branca', 25.0, '08:00', '09:00']]  # lista para as linhas de onibus
+         ['Monteiro', 'Campina Grande', 55.0, '07:00', '11:15'],
+         ['Monteiro', 'Sumé', 13.0, '07:30', '08:10'],
+         ['Monteiro', 'Serra Branca', 25.0, '08:00', '09:00']]  # lista para as linhas de onibus
 passagem = []   # Número de passagens compradas
 pagamento = []  # Receita da empresa
 historico = []  # Histórico de passagens
@@ -33,12 +33,16 @@ while opcao != 5:
             linha = int(input('Qual linha você deseja: '))
 
             if 1 <= linha <= len(linhas):  # Verifica se a linha escolhida é válida
+                #print('[0] Menu Inicial')
                 funcoes.cls()
                 linha_selecionada = linhas[linha - 1] #Seleciona o número correto da linha, excluindo a linha 0
                 linha01 = f'{linha_selecionada[0]} => {linha_selecionada[1]}' #Saí e chega
                 preco = linha_selecionada[2] #Preço da passagem
                 funcoes.compra(preco, pagamento, historico, linha01)
-            
+
+            #elif linha == 0:
+                #continue
+
             else:
                 print('Digite um valor válido.')
 
@@ -53,8 +57,7 @@ while opcao != 5:
             if senha == sen:
                 print('Senha Correta!')
                 while True:
-                    print(
-                        'O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
+                    print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
                     resp = int(input('Qual a opção desejada: '))
                     if resp == 1:
                         print(' ---- HISTORICO DE PASSAGENS ----') 
@@ -63,7 +66,6 @@ while opcao != 5:
                             for k, v in e.items():
                                 print(f'{k} = {v}')
                             funcoes.pula_linha()
-
 
                     if resp == 2:
                         soma = sum(pagamento)
@@ -111,7 +113,6 @@ while opcao != 5:
                         break
             else:
                 print('Senha incorreta!!')
-            # Criar a receita da empresa
 
         elif opcao == 4:
             funcoes.cls()
