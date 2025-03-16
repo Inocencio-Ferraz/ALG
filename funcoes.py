@@ -6,13 +6,13 @@ def cls():
 
 def pula_linha():
     print('=' * 60)
+   
 
-
-def valorint(n_passagem, linha):
+def valorint(n_passagem, linha): # Preço da passagem 
     return n_passagem * linha
 
 
-def desconto(n_passagem, c_passagem, linha):
+def desconto(n_passagem, c_passagem, linha): 
     talt = (n_passagem * linha) + (c_passagem * linha) / 2
     return talt
 
@@ -28,7 +28,7 @@ def compra(linha, pagamento, historico, linha01):
             pagar = valor_total
             pagamento.append(pagar)
             print('Passagem comprada com sucesso.')
-            passagem = {'Linha':'[Monteiro => João Pessoa]', 'quatidade de passagem': n_passagem, 'valor total': valor_total }
+            passagem = {'Linha': linha01, 'quatidade de passagem': n_passagem + c_passagem, 'valor total': valor_total }
             historico.append(passagem)
         else:
             print('Compra cancelada.')
@@ -44,5 +44,3 @@ def compra(linha, pagamento, historico, linha01):
             
         else:
             print('Compra cancelada.')
-
-    return valor_total
