@@ -51,7 +51,7 @@ def compra(linha, pagamento, historico, linha01):
             pagar = valor_total
             pagamento.append(pagar)
             print('Passagem comprada com sucesso.')
-            passagem = {'linha': linha01, 'quantidade de passagem': n_passagem, 'valor total': valor_total }
+            passagem = {'Linha': linha01, 'quantidade de passagem': n_passagem, 'valor total': valor_total }
             historico.append(passagem)
             
         else:
