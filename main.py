@@ -108,16 +108,20 @@ while running:
 
                             nova_linha.append(hora2)
                             linhas.append(nova_linha)
-                            print('Essas são as linhas de ônibus atuais: ')
-                            op = int(input(f'{linhas}\nConfirmar comprar dessa nova linha [1] SIM [2] NÃO: '))
+                            print(f'Essas são as linhas de ônibus atuais:\n{linhas}')
+                            op = int(input('Confirmar compra dessa nova linha [1] SIM [2] NÃO: '))
                             if op == 1:
                                 linha01 = f'[{saida} => {chegada}]'
                                 linha = preco
                                 funcoes.compra(linha, pagamento, historico, linha01)
                                 funcoes.cls()
+                            elif op == 2:
+                                print('Compra cancelado')
+                                time.sleep(funcoes.TEMPO_DE_ESPERA)
                             else:
-                                continue
-                        elif op == 2:  # opção para excluir linhas de ônibus na lista principal [não está funcionando a opção]
+                                print('Digito inválido, compra cancelada por segurança.')
+
+                        elif op == 2:  # opção para excluir linhas de ônibus na lista principal 
                             funcoes.cls()
                             print('Para excluir linhas de ônibus faça o que se pede:\nEssas são as linhas de ônibus disponiveis no catalogo:')
                             print(linhas)
