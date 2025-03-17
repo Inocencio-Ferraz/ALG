@@ -1,12 +1,12 @@
 import time
 import funcoes
 
-opcao = 0
+running = True 
 linhas = [['Monteiro', 'João Pessoa', 100.0, '06:00', '12:00'],
         ['Monteiro', 'Campina Grande', 55.0, '07:00', '11:15'],
         ['Monteiro', 'Sumé', 13.0, '07:30', '08:10'],
         ['Monteiro', 'Serra Branca', 25.0, '08:00', '09:00']]  # lista para as linhas de onibus
-passagem = []   # Número de passagens compradas
+
 pagamento = []  # Receita da empresa
 
 try:
@@ -14,7 +14,7 @@ try:
 except:
     historico = []
 
-while opcao != 5:
+while running:
     funcoes.cls()
     try:
         print('Viação Santa Cruz FC')
@@ -56,14 +56,12 @@ while opcao != 5:
             senha = input('Digite a senha de acesso: ')
             if senha == sen:
                 print('Senha Correta!')
-                while True:
-                    print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo adimin')
-                    # while True:
-                    #     funcoes.cls()
-                    #     funcoes.pula_linha()
+
+                admin = True
+                while admin:
+                    print('O que o funcionario deseja visualizar:\n [ 1 ] historico de passagem\n [ 2 ] Caixa da empresa\n [ 3 ] Editar linhas de Onibus\n [ 4 ] Sair do modo admin')
                     resp = int(input('Qual a opção desejada: '))
-                    #     if resp.isdigit():
-                    #         break
+                    
                     if resp == 1:
                         print(' ---- HISTORICO DE PASSAGENS ----') 
                         for e in historico:
@@ -71,10 +69,10 @@ while opcao != 5:
                             for k, v in e.items():
                                 print(f'{k} = {v}')
                             funcoes.pula_linha()
-                    if resp == 2:
+                    elif resp == 2:
                         soma = sum(pagamento)
                         print(f'Caixa da empresa: {soma}R$')
-                    if resp == 3:  # opção para adicionar e excluir linhas de onibus na lista.
+                    elif resp == 3:  # opção para adicionar e excluir linhas de onibus na lista.
                         funcoes.cls()
                         print('O que o funcionario deseja editar?\n [ 1 ] para adicionar novas linhas.\n [ 2 ] para excluir linhas antigas.')
                         op = int(input('Qual a opção desejada: '))
@@ -100,10 +98,13 @@ while opcao != 5:
                                 funcoes.compra(linha, pagamento, historico, linha01)
                             else:
                                 continue
-                        if op == 2:  # opção para excluir linhas de ônibus na lista principal
+                        elif op == 2:  # opção para excluir linhas de ônibus na lista principal
                             print('Para excluir linhas de ônibus faça o que se pede:\nEssas são as linhas de ônibus disponiveis no catalogo:')
                             print(linhas)
-                            excluir = int(input('Essas linhas são listas que possuem as informações de cada linha de ônibus, de 0 a x(quantidade de linhas de ônibus no total), selecione a lista que você deseja excluir: '))
+                            excluir = int(input('Selecione a lista que você deseja excluir: '))
+                            while len(linhas) - 1 < excluir or excluir < 0: #tratamento de erro pra excluir uma linha válida.
+                                print(f'Valor inválido. \nDigite um valor entre 0 e {len(linhas) - 1} ')
+                                excluir = int(input('Selecione a lista que você deseja excluir: '))
                             linhas.pop(excluir)
                             print('linha de ônibus excluida!\nEssas são as linhas que continuaram no catalogo.')
                             print(linhas)
@@ -111,7 +112,7 @@ while opcao != 5:
                             print('opção invalida, tente novamente.')
                     if resp == 4:
                         print('Saindo do modo administrador')
-                        break
+                        admin = False
             else:
                 print('Senha incorreta!!')
             # Criar a receita da empresa
@@ -120,7 +121,8 @@ while opcao != 5:
             funcoes.salvar(historico)
             funcoes.cls()
             print('Volte sempre.')
-            break
+            running = False
+            
 
         else:
             print('Valor inválido. Por favor, digite novamente um valor válido.')
